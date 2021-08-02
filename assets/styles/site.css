@@ -10,7 +10,7 @@
 
 h1 {
     margin: auto 0;
-    padding: 1em 0;
+    padding: 1em;
     background-color: rgba(255, 255, 255, 0.85);
     text-align: center;
 }
@@ -25,6 +25,17 @@ h1 {
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+/* Figures */
+figure {
+    margin: 1rem auto;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    width: 680px;
+    height: 440px;
+    display: block;
 }
 
 /* Byline */

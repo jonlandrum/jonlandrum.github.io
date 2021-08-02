@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="./assets/styles/site.css" />
         <script src="./assets/lib/jquery.js"></script>
         <script src="./assets/lib/bootstrap/js/bootstrap.js"></script>
+        <script src="./assets/lib/mathjax.js"></script>
         <script src="./assets/lib/luxon.js"></script>
         <script src="./assets/lib/d3.js"></script>
         <script src="./assets/scripts/site.js"></script>
@@ -44,9 +45,10 @@
         <div id="content" class="container">
             <div id="hero">
                 <h1>
-                    Are Electric Vehicles Truly Better for the Environment?<br />
+                    Are Electric Vehicles More or Less Expensive to Own?<br />
                     <small class="text-muted h4"
-                        >A data-centered approach to a problem that otherwise seems to have no clear answer.</small
+                        >Analyzing and comparing the total cost of ownership of electric and conventional
+                        vehicles</small
                     >
                 </h1>
                 <span id="attribution">Photo by Dennis Schroeder/NREL</span>
@@ -54,29 +56,125 @@
             <p id="byline">Prepared by Jonathan E. Landrum. Last modified <span id="today"></span>.</p>
             <hr />
 
-            <h2>Introducing The Question</h2>
+            <h2>Introduction</h2>
             <p>
-                On the surface, plug-in electric vehicles (PEV) seem like the natural progression of logistics
+                On the surface, plug-in battery electric vehicles (EV) seem like the natural progression of logistics
                 technology. The idea of never again having to buy gasoline, never again having to pay for a tune-up,
-                never again having to worry if your car will start this morning because of the snow and ice&hellip; it almost
-                sounds too good to be true. Cynics and skeptics decry these statements as overly simplistic, doubting
-                the claims made by the automotive companies producing the vehicles and dismissing reports from users as
-                being the result of the early part of the hype cycle [1]. But as with most truly hard problems, it's not
-                even as simple as the cynic and skeptic make it out to be.
+                never again having to worry if your car will start this morning because of the snow and ice&hellip; it
+                almost sounds too good to be true. Cynics and skeptics decry these statements as overly simplistic,
+                doubting the claims made by the automotive companies producing the vehicles and dismissing reports of
+                gargantuan savings from their owners as being the result of the early part of the hype cycle [1]. But as
+                with most truly hard problems, it's not even as simple as the cynic and skeptic make it out to be.
             </p>
             <p>
-                Analysis of the full lifecycle of PEVs&mdash;from the mining of resources such as lithium to the
+                Analysis of the full life cycle of EVs&mdash;from the mining of resources such as lithium to the
                 disposal of the same resources after the vehicle is no longer usable&mdash;reveals that significant
-                pollution and toxic chemicals are released over the course of the vehicle's full lifecycle [2, 3].
-                However, previous comparisons of this more realistic calculation to the economic and environmental cost
-                of purchasing a conventional internal combustion engive vehicle (ICEV) have often either left off the
-                same scrutiny for the ICEV, or have manipulated the input values for their model so as to make the PEV
-                appear worse for the environment [3, 4, 5]. This issue is only exacerbated by popular science media, who
-                often take a publication at face value without giving critical investigation to the methodologies used
-                in the research [3, 5].
+                pollution and toxic chemicals are released over the course of the vehicle's full existence [2, 3].
+                However, the production of conventional vehicles (CV) is equally damaging, with estimates putting the
+                carbon footprint of producing a single new vehicle at almost the same amount as the carbon released from
+                powering a typical home in the UK for three years [4]. Analyzing the production processes of EVs and CVs
+                to determine which is more damaging asks a different question than is asked in this study, and as such
+                the na&iuml;ve approach has been taken, comparing only the costs the consumer faces&mdash;the initial
+                purchase price, the cost of fuel, and the cost of scheduled maintenance&mdash;and fixing the pre- and
+                post-consumer costs as being essentially equivalent, reserving the true analysis thereof for another
+                day.
+            </p>
+
+            <h2>Worst Case Scenario</h2>
+            <p>
+                Without a doubt, a comparable EV is more expensive than its CV counterpart, and this is almost
+                completely due to the batteries present in the EV. In the following chart, the base sticker prices of
+                two comparable vehicles&mdash;one EV and one CV&mdash;are compared at simple face value, without any
+                dealer, local, regional, or federal discounts applied:
+            </p>
+
+            <figure>
+                <div id="chart1"></div>
+                <figcaption class="figure-caption text-center">
+                    Comparison of dealer sticker price without any discounts or credits
+                </figcaption>
+            </figure>
+
+            <p>
+                Starting with this as a base point, the estimated total cost of ownership (TCO) over the life of each
+                vehicle can be calculated by adding all lifetime expenses to the initial purchase price to compare the
+                worst case scenario of there being no dealer or manufacturer discounts and no local or federal tax
+                credits for the purchase of the EV. Data on the topic of vehicle maintenance costs are routinely
+                collected by the consumer advocacy group Consumer Reports, which surveys thousands of their subscribers
+                every year about the reliability and maintenance requirements of their vehicles and appliances [5].
+                Harto performed detailed analysis of the survey responses of both EV and CV from survey years 2019 and
+                2020 to arrive at the following data [5]:
+            </p>
+
+            <table class="table table-striped table-hover">
+                <caption class="text-center">
+                    Estimated per-mile maintenance costs by vehicle type
+                </caption>
+                <thead>
+                    <th scope="col">#</th>
+                    <th scope="col">Vehicle Type</th>
+                    <th scope="col">0&ndash;50k Miles</th>
+                    <th scope="col">50k&ndash;100k Miles</th>
+                    <th scope="col">100k&ndash;200k Miles</th>
+                    <th scope="col">Lifetime Average</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td>EV</td>
+                        <td>$0.012</td>
+                        <td>$0.028</td>
+                        <td>$0.043</td>
+                        <td>$0.031</td>
+                    </tr>
+                    <tr>
+                        <td scope="row">2</td>
+                        <td>CV</td>
+                        <td>$0.028</td>
+                        <td>$0.060</td>
+                        <td>$0.079</td>
+                        <td>$0.061</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                This data was used to estimate the potential maintenance requirements of the two vehicles considered. A
+                lifetime distance traveled value of 200,000 miles was selected as the end-of-life figure, and using
+                similar methodologies presented by Harto [5], the estimated maintenance costs can be added to the
+                initial purchase price:
+            </p>
+
+            <figure>
+                <div id="chart2"></div>
+                <figcaption class="figure-caption text-center">
+                    Comparison of the initial purchase price combined with the estimated lifetime maintenance cost
+                </figcaption>
+            </figure>
+
+            <p>
+                Maintenance cost reduction, while significant, is not the main benefit that is touted with regard to EV
+                adoption, and is likely not significantly responsible for the rapid growth of the non-commercial EV
+                fleet, even if it plays a more significant part in EV adoption in the commercial sector. Fuel cost
+                savings are what is generally regarded as the single greatest benefit that EV have over CV. The U.S.
+                Environmental Protection Agency (EPA) estimates the average combined miles per gallon (MPG) of the base
+                model 2021 Nissan LEAF to be 111 MGP equivalent [6], whereas the Nissan Sentra from the same year
+                received an estimated average combined MPG rating of 33 [7]. The estimated average annual fuel cost,
+                which uses a value of 15,000 miles as the distance traveled in one year, is given as $600 and $1,450 for
+                the LEAF and Sentra, respectively [8]. With these values, it is simple to deduce the estimated lifetime
+                fuel cost for each vehicle using the following formula:
+            </p>
+            <div class="text-center">
+                <img src="./assets/images/formula.png" alt="" width="275" />
+            </div>
+            <p>
+                where <code>x<sub>fe</sub></code> is the total fuel expense for the given vehicle, and
+                <code>x<sub>ac</sub></code> is the EPA annual cost of fuel for the vehicle. With these values
+                calculated, they can then be added as a third value in the comparison between the two vehicles:
             </p>
 
             <h2>References</h2>
+            https://fueleconomy.gov/feg/taxevb.shtml https://doi.org/10.1016/j.enpol.2015.02.004
             <ol>
                 <li>
                     Gartner. <i>Gartner Hype Cycle Research Methodology</i>. Retrieved 31 Jul. 2021 from
@@ -99,6 +197,54 @@
                     >.
                 </li>
                 <li>
+                    Berners-Lee, M. and Clark, D. 2010. What's the carbon footprint of ... a new car? Retrieved 31 Jul.
+                    2021 from
+                    <a
+                        href="https://www.theguardian.com/environment/green-living-blog/2010/sep/23/carbon-footprint-new-car"
+                        title=""
+                        >https://www.theguardian.com/environment/green-living-blog/2010/sep/23/carbon-footprint-new-car</a
+                    >.
+                </li>
+                <li>
+                    Harto, C. 2020. Electric Vehicle Ownership Costs: Today’s Electric Vehicles Offer Big Savings for
+                    Consumers. Retrieved 1 Aug. 2021 from
+                    <a
+                        href="
+                    https://advocacy.consumerreports.org/wp-content/uploads/2020/10/EV-Ownership-Cost-Final-Report-1.pdf"
+                        title="Harto, C. 2020"
+                    >
+                        https://advocacy.consumerreports.org/wp-content/uploads/2020/10/EV-Ownership-Cost-Final-Report-1.pdf</a
+                    >.
+                </li>
+                <li>
+                    U.S. Environmental Protection Agency. Fuel Economy of 2019&ndash;2021 Nissan Leaf. Retrieved 1 Aug.
+                    2021 from
+                    <a
+                        href="https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2019&year2=2021&make=Nissan&baseModel=Leaf&srchtyp=ymm"
+                        title="U.S. Environmental Protection Agency: Nissan LEAF"
+                        >https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2019&year2=2021&make=Nissan&baseModel=Leaf&srchtyp=ymm</a
+                    >.
+                </li>
+                <li>
+                    U.S. Environmental Protection Agency. Fuel Economy of 2019&ndash;2021 Nissan Sentra. Retrieved 1
+                    Aug. 2021 from
+                    <a
+                        href="https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2019&year2=2021&make=Nissan&baseModel=Sentra&srchtyp=ymm"
+                        title="U.S. Environmental Protection Agency: Nissan Sentra"
+                        >https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2019&year2=2021&make=Nissan&baseModel=Sentra&srchtyp=ymm</a
+                    >.
+                </li>
+                <li>
+                    U.S. Environmental Protection Agency. Compare Side-by-Side: Nissan LEAF and Nissan Sentra. Retrieved
+                    1 Aug. 2021 from
+                    <a
+                        href="https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=43664&id=43539"
+                        title="U.S. Environmental Protection Agency: Annual Fuel Cost"
+                        >https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=43664&id=43539</a
+                    >.
+                </li>
+
+                <li>
                     Tessum, C. W. <i>et al</i>. 2014. Life cycle air quality impacts of conventional and alternative
                     light-duty transportation in the United States.
                     <i>Proceedings of the National Academy of Sciences</i>. 111, 52 (Dec. 2014), 18490–18495. DOI:
@@ -114,9 +260,9 @@
                     >.
                 </li>
                 <li>
-                    Weldon, P. <i>et al</i>. 2018. Long-term cost of ownership comparative analysis between
-                    electricvehicles and internal combustion engine vehicles. <i>Sustainable Cities and Society</i>. 39,
-                    (May 2018), 578–591. DOI:
+                    Weldon, P. <i>et al</i>. 2018. Long-term cost of ownership comparative analysis between electric
+                    vehicles and internal combustion engine vehicles. <i>Sustainable Cities and Society</i>. 39, (May
+                    2018), 578–591. DOI:
                     <a href="https://doi.org/10.1016/j.scs.2018.02.024" title="Weldon, P. et al. 2018"
                         >https://doi.org/10.1016/j.scs.2018.02.024</a
                     >.
